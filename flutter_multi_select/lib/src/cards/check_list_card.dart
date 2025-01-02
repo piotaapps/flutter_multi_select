@@ -12,6 +12,9 @@ class CheckListCard<T> extends MultiSelectItem<T> {
   ///Sub-title of the check list card
   final Widget? subtitle;
 
+  ///Semantics label
+  final String? label;
+
   ///if true - The checkbox Becomes the leading component of the and if The checkbox Becomes the trailling component of the
   final bool leadingCheckBox;
 
@@ -78,6 +81,7 @@ class CheckListCard<T> extends MultiSelectItem<T> {
     bool perpetualSelected = false,
     this.title,
     this.subtitle,
+    this.label,
     this.leadingCheckBox = true,
     this.checkBoxGap = 10.0,
     this.hoverColor,

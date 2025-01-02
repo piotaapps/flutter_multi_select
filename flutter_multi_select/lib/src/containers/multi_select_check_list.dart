@@ -251,7 +251,9 @@ class _MultiSelectCheckListState<T> extends State<MultiSelectCheckList<T>> {
               shape: _item.shape,
               value: isSelected,
               side: _item.checkBoxBorderSide,
-              onChanged: !_item.enabled ? null : (v) {},
+              onChanged: !_item.enabled ? null : (v) {
+                _onChange(_item);
+              },
             ),
           ),
         );
@@ -274,46 +276,51 @@ class _MultiSelectCheckListState<T> extends State<MultiSelectCheckList<T>> {
                     },
               child: Padding(
                 padding: widget.itemPadding,
-                child: Row(
-                  children: [
-                    Visibility(visible: _item.leadingCheckBox, child: checkbox),
-                    Visibility(
-                      visible: _item.leadingCheckBox,
-                      child: SizedBox(
-                        width: _item.checkBoxGap,
-                      ),
-                    ),
-                    DefaultTextStyle(
-                      style: getTextStyle(_item.textStyles, widget.textStyles,
-                          isSelected, _item.enabled, context),
-                      child: Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _item.title ?? const SizedBox(),
-                            DefaultTextStyle(
-                              style: getTextStyle(
-                                      _item.textStyles,
-                                      widget.textStyles,
-                                      isSelected,
-                                      _item.enabled,
-                                      context)
-                                  .copyWith(fontSize: 12),
-                              child: _item.subtitle ?? const SizedBox(),
-                            )
-                          ],
+                child: Semantics(
+                  label: _item.label ?? '',
+                  value: '$isSelected',
+                  excludeSemantics: true,
+                  child: Row(
+                    children: [
+                      Visibility(visible: _item.leadingCheckBox, child: checkbox),
+                      Visibility(
+                        visible: _item.leadingCheckBox,
+                        child: SizedBox(
+                          width: _item.checkBoxGap,
                         ),
                       ),
-                    ),
-                    Visibility(
-                      visible: !_item.leadingCheckBox,
-                      child: SizedBox(
-                        width: _item.checkBoxGap,
+                      DefaultTextStyle(
+                        style: getTextStyle(_item.textStyles, widget.textStyles,
+                            isSelected, _item.enabled, context),
+                        child: Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _item.title ?? const SizedBox(),
+                              DefaultTextStyle(
+                                style: getTextStyle(
+                                        _item.textStyles,
+                                        widget.textStyles,
+                                        isSelected,
+                                        _item.enabled,
+                                        context)
+                                    .copyWith(fontSize: 12),
+                                child: _item.subtitle ?? const SizedBox(),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                    Visibility(
-                        visible: !_item.leadingCheckBox, child: checkbox),
-                  ],
+                      Visibility(
+                        visible: !_item.leadingCheckBox,
+                        child: SizedBox(
+                          width: _item.checkBoxGap,
+                        ),
+                      ),
+                      Visibility(
+                          visible: !_item.leadingCheckBox, child: checkbox),
+                    ],
+                  ),
                 ),
               ),
             ),
