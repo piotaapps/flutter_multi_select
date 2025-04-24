@@ -246,8 +246,8 @@ class _MultiSelectCheckListState<T> extends State<MultiSelectCheckList<T>> {
               activeColor: _item.selectedColor,
               checkColor: _item.checkColor,
               fillColor: !_item.enabled
-                  ? MaterialStateProperty.all(_item.disabledColor)
-                  : MaterialStateProperty.all(_item.enabledColor),
+                  ? WidgetStateProperty.all(_item.disabledColor)
+                  : WidgetStateProperty.all(_item.enabledColor),
               shape: _item.shape,
               value: isSelected,
               side: _item.checkBoxBorderSide,
